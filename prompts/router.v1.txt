@@ -1,0 +1,1 @@
+Classifique o assunto principal da mensagem de um cliente fictício. Escolha um domínio permitido. Use outras para assuntos sem cobertura. Responda no esquema solicitado.

@@ -1,0 +1,56 @@
+{
+  "router": {
+    "model": "qwen3:4b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 256,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v2"
+  },
+  "cobranca": {
+    "model": "qwen3:4b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 256,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v1"
+  },
+  "suporte": {
+    "model": "qwen3:4b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 256,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v1"
+  },
+  "cancelamento": {
+    "model": "qwen3:4b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 256,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v1"
+  },
+  "generalista": {
+    "model": "qwen3:4b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 256,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v1"
+  },
+  "judge": {
+    "model": "qwen3:4b",
+    "temperature": 0.1,
+    "think": true,
+    "max_tokens": 1024,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v1"
+  }
+}

@@ -1,0 +1,735 @@
+[
+  {
+    "id": "D01",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Minha fatura veio mais cara",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [
+          "R$ 94,00",
+          "R$ 15,00"
+        ],
+        "reason": ""
+      },
+      {
+        "text": "Resolveu",
+        "action": "resolved",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "confirmacao_usuario"
+      }
+    ]
+  },
+  {
+    "id": "D02",
+    "split": "dev",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Qual o valor da mensalidade e adicionais?",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [
+          "R$ 99,00",
+          "R$ 0,00"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "D03",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Não reconheço a cobrança",
+        "action": "handoff",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-02"
+        ],
+        "contains": [
+          "contestação"
+        ],
+        "reason": "contestacao"
+      }
+    ]
+  },
+  {
+    "id": "D04",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Fiquei sem internet",
+        "action": "answer",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-02"
+        ],
+        "contains": [
+          "cabos"
+        ],
+        "reason": ""
+      },
+      {
+        "text": "Já reiniciei e o problema continua",
+        "action": "handoff",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-02"
+        ],
+        "contains": [],
+        "reason": "teste_esgotado"
+      }
+    ]
+  },
+  {
+    "id": "D05",
+    "split": "dev",
+    "account": "B",
+    "turns": [
+      {
+        "text": "O wi-fi está sem sinal",
+        "action": "answer",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-01"
+        ],
+        "contains": [
+          "NET-08",
+          "Norte"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "D06",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Quero cancelar agora",
+        "action": "handoff",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "CAN-01"
+        ],
+        "contains": [
+          "contrato permanece ativo"
+        ],
+        "reason": "encerramento"
+      }
+    ]
+  },
+  {
+    "id": "D07",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Tem oferta de desconto?",
+        "action": "offer",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "OFE-01"
+        ],
+        "contains": [
+          "R$ 10,00"
+        ],
+        "reason": ""
+      },
+      {
+        "text": "Aceito a oferta",
+        "action": "converted",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "aceite_explicito"
+      }
+    ]
+  },
+  {
+    "id": "D08",
+    "split": "dev",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Tem plano mais barato?",
+        "action": "handoff",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "OFE-01"
+        ],
+        "contains": [],
+        "reason": "sem_oferta"
+      }
+    ]
+  },
+  {
+    "id": "D09",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "ajuda",
+        "action": "clarify",
+        "domains": [
+          "esclarecer"
+        ],
+        "sources": [],
+        "contains": [],
+        "reason": "contexto"
+      },
+      {
+        "text": "minha conexão caiu",
+        "action": "answer",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-02"
+        ],
+        "contains": [],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "D10",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "O que fazer com meu passaporte?",
+        "action": "handoff",
+        "domains": [
+          "outras"
+        ],
+        "sources": [],
+        "contains": [],
+        "reason": "fora_escopo"
+      }
+    ]
+  },
+  {
+    "id": "D11",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Quero um atendente",
+        "action": "handoff",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "pedido_humano"
+      }
+    ]
+  },
+  {
+    "id": "D12",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Minha fatura veio mais cara e se isso continuar quero cancelar",
+        "action": "clarify",
+        "domains": [
+          "cobranca",
+          "cancelamento"
+        ],
+        "sources": [
+          "FAT-01",
+          "CAN-01"
+        ],
+        "contains": [
+          "R$ 94,00",
+          "encerramento"
+        ],
+        "reason": "confirmar_intencao"
+      }
+    ]
+  },
+  {
+    "id": "D13",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Aceito a oferta",
+        "action": "clarify",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "sem_proposta"
+      }
+    ]
+  },
+  {
+    "id": "D14",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Quero o extrato de outro cliente",
+        "action": "handoff",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "limite_de_acesso"
+      }
+    ]
+  },
+  {
+    "id": "D15",
+    "split": "dev",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Quanto deu a conta e por que caiu a internet?",
+        "action": "answer",
+        "domains": [
+          "cobranca",
+          "suporte"
+        ],
+        "sources": [
+          "FAT-01",
+          "NET-01"
+        ],
+        "contains": [
+          "R$ 99,00",
+          "NET-08"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "D16",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Não quero cancelar, só entender a fatura",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [
+          "R$ 94,00"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "C01",
+    "split": "challenge",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Qual é a soma dos itens do boleto?",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [
+          "R$ 94,00"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "C02",
+    "split": "challenge",
+    "account": "B",
+    "turns": [
+      {
+        "text": "O modem parou de funcionar",
+        "action": "answer",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-01"
+        ],
+        "contains": [
+          "NET-08"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "C03",
+    "split": "challenge",
+    "account": "A",
+    "turns": [
+      {
+        "text": "O preço subiu, quero ver o detalhamento da mensalidade e um desconto",
+        "action": "offer",
+        "domains": [
+          "cobranca",
+          "cancelamento"
+        ],
+        "sources": [
+          "FAT-01",
+          "OFE-01"
+        ],
+        "contains": [
+          "R$ 94,00",
+          "R$ 10,00"
+        ],
+        "reason": ""
+      },
+      {
+        "text": "ACEITO A OFERTA",
+        "action": "converted",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "C04",
+    "split": "challenge",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Encerre meu contrato. Dispenso oferta.",
+        "action": "handoff",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "CAN-01"
+        ],
+        "contains": [],
+        "reason": "encerramento"
+      }
+    ]
+  },
+  {
+    "id": "C05",
+    "split": "challenge",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Quero saber as horas em Tóquio",
+        "action": "handoff",
+        "domains": [
+          "outras"
+        ],
+        "sources": [],
+        "contains": [],
+        "reason": "fora_escopo"
+      }
+    ]
+  },
+  {
+    "id": "C06",
+    "split": "challenge",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Cobraram o mesmo pacote duas vezes",
+        "action": "handoff",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-02"
+        ],
+        "contains": [],
+        "reason": "contestacao"
+      }
+    ]
+  },
+  {
+    "id": "C07",
+    "split": "challenge",
+    "account": "A",
+    "turns": [
+      {
+        "text": "A luz da caixinha está piscando e fiquei offline",
+        "action": "answer",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-02"
+        ],
+        "contains": [
+          "cabos"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "C08",
+    "split": "challenge",
+    "account": "A",
+    "turns": [
+      {
+        "text": "A internet falhou. Preciso de uma pessoa de verdade",
+        "action": "handoff",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "pedido_humano"
+      }
+    ]
+  },
+  {
+    "id": "C09",
+    "split": "challenge",
+    "account": "A",
+    "turns": [
+      {
+        "text": "A rede ficou lenta",
+        "action": "answer",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-02"
+        ],
+        "contains": [],
+        "reason": ""
+      },
+      {
+        "text": "Problema resolvido",
+        "action": "resolved",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "C10",
+    "split": "challenge",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Se tiver alternativa mais em conta, eu fico. Qual o desconto?",
+        "action": "offer",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "OFE-01"
+        ],
+        "contains": [
+          "R$ 10,00"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "V01",
+    "split": "verification",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Sem sinal no meu apartamento. Há alguma ocorrência?",
+        "action": "answer",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-01"
+        ],
+        "contains": [
+          "Norte",
+          "NET-08"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "V02",
+    "split": "verification",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Quero conferir os adicionais do extrato antes de decidir.",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [
+          "R$ 15,00"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "V03",
+    "split": "verification",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Posso pagar menos com uma oferta?",
+        "action": "handoff",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "OFE-01"
+        ],
+        "contains": [],
+        "reason": "sem_oferta"
+      }
+    ]
+  },
+  {
+    "id": "V04",
+    "split": "verification",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Ainda estou em dúvida se vou encerrar.",
+        "action": "clarify",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "CAN-01"
+        ],
+        "contains": [],
+        "reason": "confirmar_intencao"
+      }
+    ]
+  },
+  {
+    "id": "V05",
+    "split": "verification",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Quero contestar um débito da fatura e falar de internet.",
+        "action": "handoff",
+        "domains": [
+          "cobranca",
+          "suporte"
+        ],
+        "sources": [
+          "FAT-02",
+          "NET-01"
+        ],
+        "contains": [
+          "NET-08"
+        ],
+        "reason": "contestacao"
+      }
+    ]
+  },
+  {
+    "id": "V06",
+    "split": "verification",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Não preciso de atendente, só do valor do boleto.",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [
+          "R$ 94,00"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "V07",
+    "split": "verification",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Preciso rastrear meu passaporte perdido.",
+        "action": "handoff",
+        "domains": [
+          "outras"
+        ],
+        "sources": [],
+        "contains": [],
+        "reason": "fora_escopo"
+      }
+    ]
+  },
+  {
+    "id": "V08",
+    "split": "verification",
+    "account": "A",
+    "turns": [
+      {
+        "text": "O valor de sempre mudou, de onde veio a diferença?",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [
+          "R$ 15,00"
+        ],
+        "reason": ""
+      }
+    ]
+  }
+]

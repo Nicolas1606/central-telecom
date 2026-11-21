@@ -1,0 +1,19 @@
+{
+  "promover": false,
+  "criterios": {
+    "modelo_real": false,
+    "mesmo_candidato": true,
+    "amostra_privada_declarada": false,
+    "cobertura_minima": true,
+    "triagem": true,
+    "contratos_e_fatos": true,
+    "revisao_identificada": false,
+    "qualidade_humana": false,
+    "erros_criticos_revisados": false,
+    "aceites_com_consentimento": true,
+    "juiz_disponivel": false,
+    "orcamento_de_inferencia_conhecido": true,
+    "latencia": true
+  },
+  "nota": "A independência do revisor e a origem das perguntas precisam ser verificadas pelo responsável pelo piloto."
+}

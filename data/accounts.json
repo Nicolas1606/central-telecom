@@ -1,0 +1,16 @@
+{
+  "A": {
+    "base": 7900,
+    "extra": 1500,
+    "region": "Centro",
+    "incident": false,
+    "eligible": true
+  },
+  "B": {
+    "base": 9900,
+    "extra": 0,
+    "region": "Norte",
+    "incident": true,
+    "eligible": false
+  }
+}

@@ -1,0 +1,6 @@
+.git
+.venv
+.vs
+runtime
+**/__pycache__
+reports/runs

@@ -1,0 +1,126 @@
+{
+  "tipo": "replay público sintético",
+  "modo": "demo",
+  "arquitetura": "multi",
+  "repeticoes": 1,
+  "python": "3.12.14",
+  "config": {
+    "router": {
+      "model": "qwen3:4b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 256,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v2"
+    },
+    "cobranca": {
+      "model": "qwen3:4b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 256,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v1"
+    },
+    "suporte": {
+      "model": "qwen3:4b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 256,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v1"
+    },
+    "cancelamento": {
+      "model": "qwen3:4b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 256,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v1"
+    },
+    "generalista": {
+      "model": "qwen3:4b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 256,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v1"
+    },
+    "judge": {
+      "model": "qwen3:4b",
+      "temperature": 0.1,
+      "think": true,
+      "max_tokens": 1024,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v1"
+    }
+  },
+  "release_sha256": "722c378b8d6db5884417e97686a9afbaaf08912d431147fe755867805680f811",
+  "por_grupo": {
+    "challenge": {
+      "turnos": 12,
+      "corretos": 12,
+      "acerto_turnos": 1.0,
+      "acerto_acao": 1.0,
+      "aceites_indevidos_observados": 0,
+      "casos": 10,
+      "casos_integrais": 10
+    },
+    "dev": {
+      "turnos": 20,
+      "corretos": 20,
+      "acerto_turnos": 1.0,
+      "acerto_acao": 1.0,
+      "aceites_indevidos_observados": 0,
+      "casos": 16,
+      "casos_integrais": 16
+    },
+    "verification": {
+      "turnos": 8,
+      "corretos": 7,
+      "acerto_turnos": 0.875,
+      "acerto_acao": 0.875,
+      "aceites_indevidos_observados": 0,
+      "casos": 8,
+      "casos_integrais": 7
+    }
+  },
+  "operacao_no_replay": {
+    "conversas": 34,
+    "turnos": 40,
+    "abertas": 16,
+    "resolvidas_confirmadas": 2,
+    "resolucao": 0.058823529411764705,
+    "motivos_transbordo": {
+      "contestacao": 3,
+      "teste_esgotado": 1,
+      "encerramento": 2,
+      "sem_oferta": 2,
+      "fora_escopo": 3,
+      "pedido_humano": 2,
+      "limite_de_acesso": 1
+    },
+    "transbordo": 0.4117647058823529,
+    "ofertas": 3,
+    "aceites": 2,
+    "conversao": 0.6666666666666666,
+    "p95_ms": 0.797,
+    "chamadas_llm": 0,
+    "tokens_entrada": 0,
+    "tokens_saida": 0,
+    "custo_inferencia_usd_por_conversa": 0.0,
+    "alertas": []
+  },
+  "recall_at_3": {
+    "hybrid": 0.9285714285714286,
+    "lexical": 0.9107142857142857,
+    "semantic": 0.9285714285714286
+  },
+  "variacao_de_acao": null,
+  "casos_sha256": "482a0fa1fe2a303665e45f94ff3f6edb764ea45462457eef534095e7374e4235"
+}

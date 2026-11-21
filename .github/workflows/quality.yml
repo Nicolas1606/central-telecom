@@ -1,0 +1,20 @@
+name: Validação da central
+on: [push, pull_request]
+jobs:
+  contratos:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-graph.txt
+      - run: python -m unittest discover -s tests -v
+      - run: python main.py profile
+      - run: python main.py evaluate --split dev
+      - run: python main.py evaluate --split dev
+        env:
+          ORCHESTRATOR: langgraph

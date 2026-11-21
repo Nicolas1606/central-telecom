@@ -1,0 +1,47 @@
+{
+  "contas_ficticias": 2,
+  "fontes": 6,
+  "hashes_distintos": 6,
+  "campos_nulos": 0,
+  "turnos": 40,
+  "casos_por_grupo": {
+    "dev": 16,
+    "challenge": 10,
+    "verification": 8
+  },
+  "acoes_esperadas": {
+    "answer": 15,
+    "handoff": 14,
+    "clarify": 4,
+    "offer": 3,
+    "resolved": 2,
+    "converted": 2
+  },
+  "comprimento_mediano_pergunta": 32.5,
+  "anatel_por_ano": [
+    {
+      "ano": 2023,
+      "total": 1315982,
+      "cobranca": 410234,
+      "qualidade_funcionamento_reparo": 267120,
+      "cancelamento": 138425,
+      "fracao_dos_tres_assuntos": 0.6199013360365111
+    },
+    {
+      "ano": 2024,
+      "total": 1267189,
+      "cobranca": 383649,
+      "qualidade_funcionamento_reparo": 266562,
+      "cancelamento": 143732,
+      "fracao_dos_tres_assuntos": 0.6265387404720212
+    },
+    {
+      "ano": 2025,
+      "total": 1354791,
+      "cobranca": 435809,
+      "qualidade_funcionamento_reparo": 241672,
+      "cancelamento": 171613,
+      "fracao_dos_tres_assuntos": 0.6267343080962303
+    }
+  ]
+}

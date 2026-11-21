@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Central Telecom · demonstração",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "serve"
+      ]
+    },
+    {
+      "name": "Central Telecom · Ollama local",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "serve"
+      ],
+      "env": {
+        "AGENT_MODE": "ollama"
+      }
+    },
+    {
+      "name": "Avaliação pública",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "evaluate"
+      ]
+    }
+  ]
+}
