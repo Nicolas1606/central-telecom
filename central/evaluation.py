@@ -63,6 +63,7 @@ def evaluate(engine,cases,repeats=1,judge=False,base=None):
         summary = {"tipo":"replay público sintético","modo":engine.mode,"arquitetura":engine.design,"repeticoes":repeats,
                    "python":platform.python_version(),"config":engine.llm.config,"release_sha256":fingerprint(engine.llm.config),"por_grupo":{k:metrics([r for r in rows if r["split"]==k]) for k in sorted(set(r["split"] for r in rows))},
                    "operacao_no_replay":store.metrics()}
+    (out/"rubrica.json").write_text(json.dumps([{"id":c["id"],"account":c["account"]} for c in cases],ensure_ascii=False),encoding="utf-8")
     # Busca medida apenas com a pergunta, sem o domínio nem a política conhecidos pelo motor.
     search = []
     for case in cases:

@@ -1,0 +1,69 @@
+{
+  "router": {
+    "model": "qwen3:0.6b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 96,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v3",
+    "threads": 4,
+    "routing": "scope_gate"
+  },
+  "cobranca": {
+    "model": "qwen3:0.6b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 96,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v2",
+    "threads": 4,
+    "tool_protocol": "plan",
+    "source_selection": "validated_top1"
+  },
+  "suporte": {
+    "model": "qwen3:0.6b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 96,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v2",
+    "threads": 4,
+    "tool_protocol": "plan",
+    "source_selection": "validated_top1"
+  },
+  "cancelamento": {
+    "model": "qwen3:0.6b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 96,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v2",
+    "threads": 4,
+    "tool_protocol": "plan",
+    "source_selection": "validated_top1"
+  },
+  "generalista": {
+    "model": "qwen3:0.6b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 96,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v1",
+    "threads": 4
+  },
+  "judge": {
+    "model": "qwen3:1.7b",
+    "temperature": 0,
+    "think": false,
+    "max_tokens": 128,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "prompt_version": "v2",
+    "threads": 4
+  }
+}

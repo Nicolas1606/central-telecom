@@ -47,10 +47,11 @@ class Engine:
         if self.mode == "demo":
             return rules_route(q,state.get("last"))
         role = "router" if self.design == "multi" else "generalista"
-        if self.llm.config[role].get("routing") == "anchored":
+        strategy = self.llm.config[role].get("routing")
+        if strategy in {"anchored", "scope_gate"}:
             candidates = rules_route(q,state.get("last"))
-            if all(d in TOOLS for d in candidates):
-                trace.append({"agent":role,"routing":"anchored","domains":candidates})
+            if strategy == "scope_gate" or all(d in TOOLS for d in candidates):
+                trace.append({"agent":role,"routing":strategy,"domains":candidates})
                 return candidates
         route = self.llm.chat(role,[user({"etapa":"rotear todas as intenções no esquema","pergunta":text,
                                           "ultimo_dominio":state.get("last")})],trace,contract=Route)

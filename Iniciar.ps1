@@ -14,5 +14,9 @@ try {
     & $python -m pip install -r requirements.txt
     if ($LASTEXITCODE -ne 0) { throw "Falha ao instalar as dependências." }
     $env:AGENT_MODE = $Modo
+    if ($Modo -eq "ollama") {
+        $env:AGENT_CONFIG = Join-Path $PSScriptRoot "config/piloto.json"
+        $env:TELECOM_DB = Join-Path $PSScriptRoot "runtime/ollama.sqlite3"
+    }
     & $python main.py serve
 } finally { Pop-Location }

@@ -23,7 +23,9 @@
         "serve"
       ],
       "env": {
-        "AGENT_MODE": "ollama"
+        "AGENT_MODE": "ollama",
+        "AGENT_CONFIG": "config/piloto.json",
+        "TELECOM_DB": "runtime/ollama.sqlite3"
       }
     },
     {

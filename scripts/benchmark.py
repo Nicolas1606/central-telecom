@@ -36,7 +36,9 @@ def plans():
     lean=copy.deepcopy(scoped)
     for role in ("cobranca","suporte","cancelamento"):
         lean[role]["source_selection"]="validated_top1"
-    return {"estruturado":("multi",scoped),"enxuto":("multi",lean),
+    bounded=copy.deepcopy(lean)
+    bounded["router"]["routing"]="scope_gate"
+    return {"escopo":("multi",bounded),"estruturado":("multi",scoped),"enxuto":("multi",lean),
         "single":("single",base),"multi":("multi",base),"prompt":("multi",revised),
         "economico":("multi",improved),"maior":("multi",larger),
         "esforco":("multi",effort),"temperatura":("multi",warm)}
