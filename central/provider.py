@@ -14,6 +14,9 @@ class Strict(BaseModel):
     model_config = ConfigDict(extra="forbid")
 class Route(Strict):
     domains: list[Literal["cobranca","suporte","cancelamento","humano","outras","esclarecer"]] = Field(min_length=1,max_length=3)
+class ToolPlan(Strict):
+    name: Literal["invoice","network","eligibility","handoff"]
+
 class Choice(Strict):
     source_id: str = Field(max_length=16)
 class Verdict(Strict):
@@ -35,7 +38,7 @@ class Ollama:
         version = cfg.get("prompt_version","v2" if role == "router" else "v1")
         system = (ROOT / f"prompts/{role}.{version}.txt").read_text(encoding="utf-8")
         data = {"model":cfg["model"],"stream":False,"think":cfg["think"],
-                "options":{"temperature":cfg["temperature"],"num_predict":cfg["max_tokens"],"num_ctx":4096},
+                "options":{"temperature":cfg["temperature"],"num_predict":cfg["max_tokens"],"num_ctx":cfg.get("context_tokens",4096)},
                 "messages":[{"role":"system","content":system},*messages]}
         if "threads" in cfg:
             data["options"]["num_thread"] = cfg["threads"]
@@ -64,7 +67,7 @@ class Ollama:
             output = contract.model_validate_json(msg["content"]) if contract else msg
             if tools:
                 span["requested_tools"] = [c.get("function",{}).get("name") for c in msg.get("tool_calls",[]) if isinstance(c,dict)]
-            elif isinstance(output, (Choice, Route, Verdict)):
+            elif isinstance(output, (Choice, Route, Verdict, ToolPlan)):
                 # Decisões categóricas podem ser inspecionadas sem persistir a mensagem livre.
                 span["decision"] = output.model_dump(exclude={"reason"})
             span["ok"] = True

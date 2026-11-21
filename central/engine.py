@@ -3,7 +3,7 @@ import json
 import os
 import re
 from .knowledge import Index, norm
-from .provider import Choice, Ollama, Route, Unavailable, user
+from .provider import Choice, Ollama, ToolPlan, Route, Unavailable, user
 from .tools import DESCRIPTIONS, TOOLS, lookup, schema
 
 KEYS = {
@@ -47,6 +47,11 @@ class Engine:
         if self.mode == "demo":
             return rules_route(q,state.get("last"))
         role = "router" if self.design == "multi" else "generalista"
+        if self.llm.config[role].get("routing") == "anchored":
+            candidates = rules_route(q,state.get("last"))
+            if all(d in TOOLS for d in candidates):
+                trace.append({"agent":role,"routing":"anchored","domains":candidates})
+                return candidates
         route = self.llm.chat(role,[user({"etapa":"rotear todas as intenções no esquema","pergunta":text,
                                           "ultimo_dominio":state.get("last")})],trace,contract=Route)
         domains = route.domains
@@ -60,7 +65,14 @@ class Engine:
         tool = TOOLS[domain]
         role = domain if self.design == "multi" else "generalista"
         question = user({"dominio":domain,"pergunta":text,"ultimo_dominio":state.get("last")})
-        if self.mode == "ollama":
+        structured = self.mode == "ollama" and self.llm.config[role].get("tool_protocol") == "plan"
+        if structured:
+            task = user({"operation":"select read-only tool","domain":domain,"customer_question":text,
+                         "tools":{"invoice":"billing","network":"technical support","eligibility":"contract or discount","handoff":"cannot serve"}})
+            proposal = self.llm.chat(role,[task],trace,contract=ToolPlan)
+            if proposal.name != tool:
+                raise Unavailable("Plano estruturado incompatível com o domínio")
+        elif self.mode == "ollama":
             allowed = [tool] if self.design=="multi" else list(DESCRIPTIONS)
             msg = self.llm.chat(role,[question],trace,tools=[schema(n) for n in allowed])
             calls = msg.get("tool_calls") or []
@@ -119,9 +131,12 @@ class Engine:
         if self.mode == "ollama" and direct:
             trace.append({"agent":role,"selection":"validated_top1","source_id":policy})
         if self.mode=="ollama" and not direct:
-            messages = [question,{"role":"assistant","content":"","tool_calls":calls},
-                        {"role":"tool","tool_name":tool,"content":json.dumps(fact,ensure_ascii=False)},
-                        user({"etapa":"escolher fonte pertinente","fontes":[[r["id"],r["text"]] for r in hits]})]
+            if structured:
+                messages = [question, user({"ferramenta_executada":tool,"fatos":fact})]
+            else:
+                messages = [question,{"role":"assistant","content":"","tool_calls":calls},
+                            {"role":"tool","tool_name":tool,"content":json.dumps(fact,ensure_ascii=False)}]
+            messages.append(user({"etapa":"escolher fonte pertinente","fontes":[[r["id"],r["text"]] for r in hits]}))
             choice = self.llm.chat(role,messages,trace,contract=Choice)
             if choice.source_id != policy:
                 raise Unavailable("Fonte escolhida não sustenta a regra aplicável")
