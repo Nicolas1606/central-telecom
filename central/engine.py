@@ -113,7 +113,12 @@ class Engine:
         else:
             hits = self.index.search(query,domain,self.search)
         trace.append({"agent":role,"retrieval":[r["id"] for r in hits],"expected_policy":policy})
-        if self.mode=="ollama":
+        # Para a variante econômica, um trecho único compatível com a política de negócio
+        # pode ser confirmado pelo servidor após uma chamada real de ferramenta.
+        direct = self.llm.config[role].get("source_selection") == "validated_top1" and hits and hits[0]["id"] == policy
+        if self.mode == "ollama" and direct:
+            trace.append({"agent":role,"selection":"validated_top1","source_id":policy})
+        if self.mode=="ollama" and not direct:
             messages = [question,{"role":"assistant","content":"","tool_calls":calls},
                         {"role":"tool","tool_name":tool,"content":json.dumps(fact,ensure_ascii=False)},
                         user({"etapa":"escolher fonte pertinente","fontes":[[r["id"],r["text"]] for r in hits]})]

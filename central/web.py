@@ -1,7 +1,8 @@
 import os
+import secrets
 from typing import Literal
 from uuid import UUID
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
@@ -29,6 +30,15 @@ def create_app(db=None,engine=None):
     if os.getenv("ORCHESTRATOR")=="langgraph":
         import langgraph.graph
     store = Store(db or os.getenv("TELECOM_DB",str(ROOT/"runtime/telecom.sqlite3")))
+    operator_token = os.getenv("TELECOM_OPERATOR_TOKEN","")
+    if os.getenv("TELECOM_ENV") == "pilot" and len(operator_token) < 24:
+        raise ValueError("Para o piloto, defina TELECOM_OPERATOR_TOKEN com ao menos 24 caracteres.")
+
+    def operator(request: Request):
+        if operator_token and not secrets.compare_digest(
+                request.headers.get("authorization","").encode(), ("Bearer " + operator_token).encode()):
+            raise HTTPException(401,"Acesso de operador necessário.")
+
     app.mount("/static",StaticFiles(directory=ROOT/"ui"),name="arquivos")
     @app.middleware("http")
     async def local_origin(request:Request,call_next):
@@ -55,13 +65,13 @@ def create_app(db=None,engine=None):
             raise HTTPException(404,"Sessão inexistente") from exc
         except Conflict as exc:
             raise HTTPException(409,str(exc)) from exc
-    @app.get("/api/metrics")
+    @app.get("/api/metrics",dependencies=[Depends(operator)])
     def metrics():
         return store.metrics()
-    @app.get("/api/tickets")
+    @app.get("/api/tickets",dependencies=[Depends(operator)])
     def tickets():
         return store.tickets()
-    @app.post("/api/tickets/{tid}/revisar")
+    @app.post("/api/tickets/{tid}/revisar",dependencies=[Depends(operator)])
     def review(tid:str):
         try:
             store.close(tid)

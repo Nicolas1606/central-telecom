@@ -1,0 +1,126 @@
+[
+  {
+    "id": "D01",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Minha fatura veio mais cara",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [
+          "R$ 94,00",
+          "R$ 15,00"
+        ],
+        "reason": ""
+      },
+      {
+        "text": "Resolveu",
+        "action": "resolved",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "confirmacao_usuario"
+      }
+    ]
+  },
+  {
+    "id": "D05",
+    "split": "dev",
+    "account": "B",
+    "turns": [
+      {
+        "text": "O wi-fi está sem sinal",
+        "action": "answer",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-01"
+        ],
+        "contains": [
+          "NET-08",
+          "Norte"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "D07",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Tem oferta de desconto?",
+        "action": "offer",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "OFE-01"
+        ],
+        "contains": [
+          "R$ 10,00"
+        ],
+        "reason": ""
+      },
+      {
+        "text": "Aceito a oferta",
+        "action": "converted",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "aceite_explicito"
+      }
+    ]
+  },
+  {
+    "id": "D12",
+    "split": "dev",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Minha fatura veio mais cara e se isso continuar quero cancelar",
+        "action": "clarify",
+        "domains": [
+          "cobranca",
+          "cancelamento"
+        ],
+        "sources": [
+          "FAT-01",
+          "CAN-01"
+        ],
+        "contains": [
+          "R$ 94,00",
+          "encerramento"
+        ],
+        "reason": "confirmar_intencao"
+      }
+    ]
+  },
+  {
+    "id": "C06",
+    "split": "challenge",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Cobraram o mesmo pacote duas vezes",
+        "action": "handoff",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-02"
+        ],
+        "contains": [],
+        "reason": "contestacao"
+      }
+    ]
+  }
+]

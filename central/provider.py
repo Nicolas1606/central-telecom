@@ -1,4 +1,5 @@
 """Cliente do Ollama com orçamento limitado, telemetria e contratos tipados."""
+import copy
 import hashlib
 import json
 import os
@@ -24,9 +25,10 @@ class Unavailable(Exception):
 class Ollama:
     def __init__(self):
         self.url = os.getenv("OLLAMA_URL","http://127.0.0.1:11434").rstrip("/")
-        self.config = CONFIG
+        self.config = copy.deepcopy(CONFIG)
         if os.getenv("AGENT_CONFIG"):
-            self.config = json.loads(open(os.environ["AGENT_CONFIG"],encoding="utf-8").read())
+            from pathlib import Path
+            self.config = json.loads(Path(os.environ["AGENT_CONFIG"]).read_text(encoding="utf-8"))
 
     def chat(self, role, messages, trace, *, contract=None, tools=None):
         cfg = self.config[role]
@@ -35,13 +37,18 @@ class Ollama:
         data = {"model":cfg["model"],"stream":False,"think":cfg["think"],
                 "options":{"temperature":cfg["temperature"],"num_predict":cfg["max_tokens"],"num_ctx":4096},
                 "messages":[{"role":"system","content":system},*messages]}
+        if "threads" in cfg:
+            data["options"]["num_thread"] = cfg["threads"]
+        if "seed" in cfg:
+            data["options"]["seed"] = cfg["seed"]
         if contract:
             data["format"] = contract.model_json_schema()
         if tools:
             data["tools"] = tools
         span = {"agent":role,"model":cfg["model"],"prompt":version,
                 "hash":hashlib.sha256(system.encode()).hexdigest()[:12],"tokens_in":None,"tokens_out":None,
-                "cost_usd":None,"ok":False}
+                "cost_usd":None,"ok":False,"temperature":cfg["temperature"],"think":cfg["think"],
+                "max_tokens":cfg["max_tokens"],"purpose":"tool" if tools else contract.__name__}
         start = time.perf_counter()
         try:
             with httpx.Client(trust_env=False,timeout=60) as client:
@@ -55,6 +62,11 @@ class Ollama:
             if all(v is not None for v in (*rates,a,b)):
                 span["cost_usd"] = (a*rates[0]+b*rates[1])/1e6
             output = contract.model_validate_json(msg["content"]) if contract else msg
+            if tools:
+                span["requested_tools"] = [c.get("function",{}).get("name") for c in msg.get("tool_calls",[]) if isinstance(c,dict)]
+            elif isinstance(output, (Choice, Route, Verdict)):
+                # Decisões categóricas podem ser inspecionadas sem persistir a mensagem livre.
+                span["decision"] = output.model_dump(exclude={"reason"})
             span["ok"] = True
             return output
         except (httpx.HTTPError,ValueError,KeyError,TypeError) as exc:

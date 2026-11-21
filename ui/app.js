@@ -6,10 +6,22 @@ const add = (parent, tag, text) => {
   return node;
 };
 let session, revision, busy = false, pending = null;
+let operatorKey = "";
 async function api(path, body) {
-  const response = await fetch(path, body === undefined ? {} : {
-    method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body)
-  });
+  const staff = path === '/api/metrics' || path.startsWith('/api/tickets');
+  const options = body === undefined ? {headers:{}} : {
+    method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
+  };
+  if (staff && operatorKey) options.headers.Authorization = 'Bearer ' + operatorKey;
+  let response = await fetch(path,options);
+  if (staff && response.status === 401) {
+    const token = window.prompt('Informe o token de operador desta instalação.');
+    if (token) {
+      options.headers.Authorization = 'Bearer ' + token;
+      response = await fetch(path,options);
+      if (response.ok) operatorKey = token;
+    }
+  }
   const value = await response.json();
   if (!response.ok) throw new Error(typeof value.detail === 'string' ? value.detail : 'Confira os dados da solicitação.');
   return value;
