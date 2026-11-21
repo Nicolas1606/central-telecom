@@ -1,0 +1,228 @@
+[
+  {
+    "id": "N01",
+    "split": "prospectivo_publico",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Apareceu um adicional na mensalidade. Qual foi o total?",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [
+          "R$ 94,00"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "N02",
+    "split": "prospectivo_publico",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Estou no Norte, a rede caiu para todo mundo no bairro?",
+        "action": "answer",
+        "domains": [
+          "suporte"
+        ],
+        "sources": [
+          "NET-01"
+        ],
+        "contains": [
+          "NET-08"
+        ],
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "id": "N03",
+    "split": "prospectivo_publico",
+    "account": "A",
+    "turns": [
+      {
+        "text": "A mesma tarifa apareceu duas vezes no extrato.",
+        "action": "handoff",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-02"
+        ],
+        "contains": [
+          "contestação"
+        ],
+        "reason": "contestacao"
+      }
+    ]
+  },
+  {
+    "id": "N04",
+    "split": "prospectivo_publico",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Preciso conversar com uma pessoa de verdade agora.",
+        "action": "handoff",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "pedido_humano"
+      }
+    ]
+  },
+  {
+    "id": "N05",
+    "split": "prospectivo_publico",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Se a conexão continuar assim, talvez eu encerre o contrato.",
+        "action": "clarify",
+        "domains": [
+          "suporte",
+          "cancelamento"
+        ],
+        "sources": [
+          "NET-02",
+          "CAN-01"
+        ],
+        "contains": [],
+        "reason": "confirmar_intencao"
+      }
+    ]
+  },
+  {
+    "id": "N06",
+    "split": "prospectivo_publico",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Tem como pagar menos por mês sem sair da operadora?",
+        "action": "offer",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "OFE-01"
+        ],
+        "contains": [
+          "R$ 10,00"
+        ],
+        "reason": "elegivel"
+      }
+    ]
+  },
+  {
+    "id": "N07",
+    "split": "prospectivo_publico",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Consegue algum desconto para esta linha?",
+        "action": "handoff",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "OFE-01"
+        ],
+        "contains": [],
+        "reason": "sem_oferta"
+      }
+    ]
+  },
+  {
+    "id": "N08",
+    "split": "prospectivo_publico",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Encerre meu contrato imediatamente, por favor.",
+        "action": "handoff",
+        "domains": [
+          "cancelamento"
+        ],
+        "sources": [
+          "CAN-01"
+        ],
+        "contains": [],
+        "reason": "encerramento"
+      }
+    ]
+  },
+  {
+    "id": "N09",
+    "split": "prospectivo_publico",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Bom dia, pode me dar uma força?",
+        "action": "clarify",
+        "domains": [
+          "esclarecer"
+        ],
+        "sources": [],
+        "contains": [],
+        "reason": "contexto"
+      }
+    ]
+  },
+  {
+    "id": "N10",
+    "split": "prospectivo_publico",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Quanto custa uma passagem de ônibus para amanhã?",
+        "action": "handoff",
+        "domains": [
+          "outras"
+        ],
+        "sources": [],
+        "contains": [],
+        "reason": "fora_escopo"
+      }
+    ]
+  },
+  {
+    "id": "N11",
+    "split": "prospectivo_publico",
+    "account": "A",
+    "turns": [
+      {
+        "text": "Posso consultar a fatura de outra conta?",
+        "action": "handoff",
+        "domains": [],
+        "sources": [],
+        "contains": [],
+        "reason": "limite_de_acesso"
+      }
+    ]
+  },
+  {
+    "id": "N12",
+    "split": "prospectivo_publico",
+    "account": "B",
+    "turns": [
+      {
+        "text": "Qual foi o total do boleto deste mês?",
+        "action": "answer",
+        "domains": [
+          "cobranca"
+        ],
+        "sources": [
+          "FAT-01"
+        ],
+        "contains": [],
+        "reason": ""
+      }
+    ]
+  }
+]
