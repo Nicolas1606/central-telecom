@@ -1,0 +1,7 @@
+case,turn,expected,actual,reason
+D09,1,clarify,handoff,encerramento
+D09,2,answer,blocked,sessao_encerrada
+D10,1,handoff,handoff,encerramento
+C05,1,handoff,handoff,encerramento
+V07,1,handoff,handoff,encerramento
+V08,1,answer,handoff,encerramento

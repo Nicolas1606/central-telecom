@@ -1,0 +1,124 @@
+{
+  "tipo": "replay público sintético",
+  "modo": "ollama",
+  "arquitetura": "multi",
+  "repeticoes": 2,
+  "python": "3.12.14",
+  "config": {
+    "router": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v3",
+      "threads": 4,
+      "routing": "anchored"
+    },
+    "cobranca": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v2",
+      "threads": 4,
+      "tool_protocol": "plan",
+      "source_selection": "validated_top1"
+    },
+    "suporte": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v2",
+      "threads": 4,
+      "tool_protocol": "plan",
+      "source_selection": "validated_top1"
+    },
+    "cancelamento": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v2",
+      "threads": 4,
+      "tool_protocol": "plan",
+      "source_selection": "validated_top1"
+    },
+    "generalista": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v1",
+      "threads": 4
+    },
+    "judge": {
+      "model": "qwen3:1.7b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 128,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v2",
+      "threads": 4
+    }
+  },
+  "release_sha256": "27d6e13f8f2e871e0a9ee06980dd89032579d0e6ec677b1736e213402927dab2",
+  "por_grupo": {
+    "challenge": {
+      "turnos": 2,
+      "corretos": 2,
+      "acerto_turnos": 1.0,
+      "acerto_acao": 1.0,
+      "aceites_indevidos_observados": 0,
+      "casos": 2,
+      "casos_integrais": 2
+    },
+    "dev": {
+      "turnos": 12,
+      "corretos": 12,
+      "acerto_turnos": 1.0,
+      "acerto_acao": 1.0,
+      "aceites_indevidos_observados": 0,
+      "casos": 8,
+      "casos_integrais": 8
+    }
+  },
+  "operacao_no_replay": {
+    "conversas": 10,
+    "turnos": 14,
+    "abertas": 4,
+    "resolvidas_confirmadas": 2,
+    "resolucao": 0.2,
+    "motivos_transbordo": {
+      "contestacao": 2
+    },
+    "transbordo": 0.2,
+    "ofertas": 2,
+    "aceites": 2,
+    "conversao": 1.0,
+    "p95_ms": 1340.922,
+    "chamadas_llm": 12,
+    "tokens_entrada": 1972,
+    "tokens_saida": 124,
+    "custo_inferencia_usd_por_conversa": null,
+    "alertas": []
+  },
+  "recall_at_3": {
+    "hybrid": 1.0,
+    "lexical": 0.8,
+    "semantic": 1.0
+  },
+  "variacao_de_acao": 0,
+  "casos_sha256": "5e58c51773e54d4b9ddd170a4b2a414f609ca87c2e6d753d15beeaabdd3a8af4"
+}

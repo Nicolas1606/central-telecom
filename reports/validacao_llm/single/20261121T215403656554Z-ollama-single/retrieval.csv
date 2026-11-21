@@ -1,0 +1,16 @@
+caso,split,metodo,recall_at_3,ids
+D01,dev,lexical,1.0,FAT-01 OFE-01
+D01,dev,semantic,1.0,FAT-01 OFE-01 FAT-02
+D01,dev,hybrid,1.0,FAT-01 OFE-01 FAT-02
+D05,dev,lexical,1.0,NET-02 NET-01 CAN-01
+D05,dev,semantic,1.0,NET-02 NET-01 CAN-01
+D05,dev,hybrid,1.0,NET-02 NET-01 CAN-01
+D07,dev,lexical,1.0,OFE-01 CAN-01 NET-01
+D07,dev,semantic,1.0,OFE-01 CAN-01 FAT-01
+D07,dev,hybrid,1.0,OFE-01 CAN-01 FAT-01
+D12,dev,lexical,1.0,FAT-01 OFE-01 CAN-01
+D12,dev,semantic,1.0,OFE-01 FAT-01 CAN-01
+D12,dev,hybrid,1.0,OFE-01 FAT-01 CAN-01
+C06,challenge,lexical,0.0,FAT-01
+C06,challenge,semantic,1.0,FAT-01 OFE-01 FAT-02
+C06,challenge,hybrid,1.0,FAT-01 OFE-01 FAT-02

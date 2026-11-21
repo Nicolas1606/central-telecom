@@ -4,6 +4,20 @@
 
 Imagine que um cliente diga **“Minha fatura veio mais cara e, se isso continuar, quero cancelar.”** No perfil A, o extrato fictício mostra R$ 79,00 de mensalidade e R$ 15,00 de adicionais. A aplicação explica os R$ 94,00 e pergunta se o cliente quer efetivamente encerrar o contrato. Um pedido explícito abre um protocolo com o histórico necessário para um atendente.
 
+## O que esta entrega demonstra
+
+**O que acontece quando o modelo entende “ajuda” como um pedido de cancelamento?** Na avaliação, o classificador sugeriu a área errada e o atendimento terminou antes do esclarecimento. O candidato agora exige evidência de que o assunto pertence ao escopo antes de enviar a pergunta ao especialista. O especialista propõe uma consulta estruturada, o servidor confere a ferramenta permitida, busca a política e produz o rascunho com os dados do perfil. O fluxo experimental de chamada nativa de ferramentas foi preservado para comparação.
+
+| Evidência | Resultado observado | Onde conferir |
+|---|---|---|
+| Inferência real com Ollama e LangGraph, mesmas 34 conversas públicas | 34/40 turnos corretos antes do controle de escopo, **39/40** depois. A candidata final também obteve 39/40. Um pedido sobre mudança de valor continuou ambíguo | [Antes](reports/amostra_completa) · [Candidata final](reports/final) |
+| Formulações adicionais congeladas antes da primeira rodada | **8/12** na primeira execução e **12/12** após corrigir a interpretação e repetir as mesmas perguntas | [Primeira rodada](reports/novas) · [Regressão](reports/regressao_novas) |
+| FinOps, cinco conversas executadas duas vezes, com os mesmos modelos | Ao verificar no servidor a primeira política compatível, as chamadas passaram de 24 para 12 e os turnos corretos de 6/14 para 14/14 | [Medições pareadas](reports/finops.csv) |
+| Dados conversacionais reais | 71.397 mensagens com resposta de suporte em três contas públicas de telecom. Mediana de 3,77 min e p90 de 23,11 min | [Agregados e figura](reports/campo) |
+| Canal e transbordo | O chat consultou uma fatura com LLM real e repassou o histórico ao operador via HTTP | [Transcrição técnica do teste](reports/chat_final.json) |
+
+A aplicação usa contas fictícias. O corpus histórico em inglês informa hipóteses sobre atendimento. Os replays avaliam regras, modelos e políticas em português. Tempo poupado pelos clientes e adoção por uma equipe precisam de um piloto. [Decisão e resultados](docs/EVIDENCIAS.md) · [Cada requisito da vaga](docs/VAGA.md) · [As oito etapas do CRISP-AI](docs/CRISP-AI.md).
+
 ## Abrir no Windows
 
 **Visual Studio.** Extraia o ZIP. No Visual Studio Installer, habilite a carga de trabalho **Desenvolvimento em Python**. Abra `CentralTelecom.sln`. No terminal da solução, a pasta correta contém `main.py` e `requirements.txt`. A primeira instalação precisa de internet. O ambiente de referência usa Python 3.12 de 64 bits.
@@ -29,22 +43,24 @@ Abra **http://127.0.0.1:8000**. Para depurar pelo Visual Studio, selecione o int
 | Modo | Decisões e ferramentas | Uso |
 |---|---|---|
 | `demo`, padrão | Regras de intenção, ferramentas locais, índice de políticas e respostas controladas | Explorar o produto e reproduzir contratos em qualquer computador após instalar as dependências |
-| `ollama` | LLM local escolhe domínios, chama ferramentas e seleciona fonte com saída estruturada. O servidor verifica a decisão e compõe a orientação | Medir comportamento do modelo, comparar prompts, registrar tokens, custo e latência |
+| `ollama` | No candidato, regras delimitam o domínio e o LLM seleciona a consulta por JSON. A variante nativa delega roteamento, tool calling e seleção de fonte ao LLM. O servidor verifica a decisão e compõe a orientação | Medir comportamento do modelo, comparar prompts, registrar tokens, custo e latência |
 
-Para testar os agentes com pesos reais, mantenha o serviço Ollama em execução. Se `ollama list` já mostrar `qwen3:4b`, o modelo está disponível no seu computador. Caso precise baixar, use `ollama pull qwen3:4b`. Comece pelo caso curto D01.
+Para reproduzir a configuração avaliada, instale o Ollama, abra outro terminal e baixe os pesos. O 0.6b seleciona a ferramenta de cada especialista. O 1.7b atua como juiz offline. Para usar apenas o chat basta o primeiro. O arquivo `config/piloto.json` identifica as escolhas por papel.
 
 ```powershell
-.\.venv\Scripts\python.exe main.py doctor
+ollama pull qwen3:0.6b
+ollama pull qwen3:1.7b
+.\Iniciar.ps1 -Modo ollama
+```
+
+Para rodar um caso isolado com o juiz no terminal do projeto:
+
+```powershell
+$env:AGENT_CONFIG = "config/piloto.json"
 .\.venv\Scripts\python.exe main.py evaluate --mode ollama --case D01 --judge
 ```
 
-O caso D01 pede o valor da fatura e depois confirma a solução. Abra `turns.csv` e `traces.jsonl` no diretório impresso pelo comando. Confira `ok`, o veredito do juiz, as fontes, os tokens e a ferramenta `invoice`. Em seguida, encerre o servidor anterior com Ctrl+C e inicie o chat generativo em banco separado.
-
-```powershell
-$env:AGENT_MODE = "ollama"
-$env:TELECOM_DB = "runtime/ollama.sqlite3"
-.\.venv\Scripts\python.exe main.py serve
-```
+O executor padrão do chat é o nativo. Para reproduzir o benchmark com LangGraph no mesmo terminal, instale `requirements-graph.txt`, defina `$env:ORCHESTRATOR = "langgraph"` e execute `python scripts/benchmark.py --cases evaluation/cases.json --arms final --output runtime/meu-benchmark` com o Python do projeto. Cada execução precisa de uma pasta nova. A configuração original para experiências com qwen3:4b continua em `config/agents.json`. O servidor usa a porta 8000. Encerre uma instância anterior com Ctrl+C antes de iniciar outra.
 
 Queda do modelo, chamada de ferramenta inválida ou fonte incompatível resultam em transbordo com motivo visível no trace. O modelo recebe contexto limitado a pergunta atual, última área, fatos da ferramenta e passagens recuperadas. A máquina de estados também conserva a revisão e a proposta pendente. [API de chat do Ollama](https://docs.ollama.com/api/chat)
 
@@ -90,7 +106,7 @@ O primeiro replay verificou 20/20 turnos de desenvolvimento e 9/12 turnos de des
 | Desafio incorporado à regressão | 10 | 12/12 |
 | Verificação reutilizada após diagnóstico | 8 | 7/8 |
 
-**39 de 40 turnos** atenderam ao gabarito na rodada final. A busca lexical atingiu recall@3 médio de 0,911. A busca densa e a híbrida chegaram a 0,929 nessa amostra. Há resultado por pergunta e registro do erro restante em [reports/example](reports/example). O ensaio é público, sintético e executado por regras. Para afirmar desempenho do LLM e impacto com clientes, use o piloto e a revisão independente.
+**39 de 40 turnos** atenderam ao gabarito na rodada final. A busca lexical atingiu recall@3 médio de 0,911. A busca densa e a híbrida chegaram a 0,929 nessa amostra. Há resultado por pergunta e registro do erro restante em [reports/example](reports/example). O ensaio é público, sintético e executado por regras. Os resultados do LLM real aparecem na tabela de abertura. O protocolo em docs/PILOTO.md mede o efeito com pessoas.
 
 ![Matriz de ações e acerto nos conjuntos públicos](reports/example/avaliacao.png)
 
@@ -103,7 +119,7 @@ O primeiro replay verificou 20/20 turnos de desenvolvimento e 9/12 turnos de des
 .\.venv\Scripts\python.exe main.py analyze --db runtime/telecom.sqlite3
 ```
 
-Nesta entrega, 29 testes automatizados passaram e um teste opcional de LangGraph ficou pendente. [Lista de testes e estados](reports/testes.md).
+A suíte desta entrega foi executada com LangGraph instalado. [Lista de testes e estados](reports/testes.md).
 
 O benchmark cria banco temporário e salva cada execução separadamente em `reports/runs/`. O painel lê apenas o banco do chat. Para investigar o comportamento não determinístico do LLM, rode o mesmo conjunto ao menos três vezes com cada configuração:
 
@@ -130,9 +146,9 @@ O experimento compara **generalista**, **multiagente padrão** e **multiagente c
 |---|---|
 | Orquestração, especialistas, intenção, contexto e transbordo | `central/engine.py`, `central/graph.py`, chat, fila e resumo por ticket |
 | System prompts e revisão antes de promover | `prompts/`, impressão digital do candidato, template de PR, `python main.py gate` e CI |
-| Tool calling e saída estruturada | `central/provider.py`, `central/tools.py`, testes de protocolo HTTP com Ollama controlado |
+| Tool calling e saída estruturada | `central/provider.py`, `central/tools.py`, contratos HTTP, traces reais do protocolo nativo e planos JSON executados pelo servidor |
 | RAG, embeddings, chunking e qualidade da recuperação | `central/knowledge.py`, `knowledge/`, `retrieval.csv` |
-| MCP e framework de agentes | Servidor e cliente MCP stdio. Executor LangGraph opcional com teste de paridade |
+| MCP e framework de agentes | Servidor e cliente MCP stdio executados. LangGraph usado também na avaliação real |
 | Regressão, bordas, juiz LLM e investigação | `tests/`, `evaluation/cases.json`, `central/evaluation.py`, relatórios antes/depois |
 | FinOps, esforço, temperatura e compromisso entre qualidade e custo | Configurações por agente, traces de execução, experimento pareado |
 | Observabilidade e análise conversacional | `central/storage.py`, `central/analysis.py`, painel, alertas, CSV e gráfico de eventos |
@@ -158,3 +174,15 @@ O experimento compara **generalista**, **multiagente padrão** e **multiagente c
 | `runtime/` | Criado ao executar. Banco local e arquivos de análise, ignorados pelo Git |
 
 **Leitura guiada.** [As oito etapas do CRISP-AI](docs/CRISP-AI.md) · [Diagnóstico dos erros e decisão técnica](docs/RESULTADOS.md) · [Piloto e revisão independente](docs/PILOTO.md) · [Implantação, alertas e reversão](docs/RUNBOOK.md) · [Ambiente de validação](docs/AMBIENTE.md).
+
+
+### Histórico Git incluído na entrega
+
+O ZIP contém a pasta central-telecom com os arquivos para abrir diretamente e, ao lado, historico.bundle com os commits e tags da reconstrução. Para examinar as mudanças com o Git, execute no diretório extraído:
+
+```powershell
+git clone historico.bundle central-com-historico
+git -C central-com-historico log --oneline --decorate
+```
+
+O bundle preserva a autoria técnica da montagem e as etapas do experimento. O modelo e os dados brutos externos são obtidos pelos comandos desta documentação. O template de PR está pronto para uma revisão humana no repositório de destino.

@@ -1,36 +1,47 @@
-# Validação da entrega
+# Testes da reconstrução
 
-Python 3.12 · Linux. 30 testes descobertos, 29 aprovados e 1 ignorado por dependência opcional (LangGraph).
+37 testes aprovados, zero ignorados. A suíte foi executada em Linux com LangGraph instalado. O teste do grafo usou dois especialistas e o teste MCP consultou políticas em um segundo processo. Os replays com pesos reais estão em diretórios próprios.
 
-| Teste | Estado |
-|---|---|
-| test_ambiguous_value | Aprovado |
-| test_case_does_not_open_business_ticket_on_question_only | Aprovado |
-| test_concurrent_confirmations | Aprovado |
-| test_customer_requests_cancel_after_offer | Aprovado |
-| test_empty_metrics | Aprovado |
-| test_http | Aprovado |
-| test_index | Aprovado |
-| test_negative_handoff | Aprovado |
-| test_priority_over_offer | Aprovado |
-| test_private_question_not_logged | Aprovado |
-| test_public_development | Aprovado |
-| test_retry_and_persistence | Aprovado |
-| test_stale_offer | Aprovado |
-| test_ticket_review | Aprovado |
-| test_judge_calibration_detects_false_approval | Aprovado |
-| test_reject_mismatched_experiments | Aprovado |
-| test_repeated_run_and_ungraded_release | Aprovado |
-| test_deployed_channel | Aprovado |
-| test_graph_two_specialists | Ignorado · LangGraph ausente |
-| test_mcp_in_workflow | Aprovado |
-| test_stdio_search | Aprovado |
-| test_commercial_consent_never_generic_yes | Aprovado |
-| test_duplicate_route | Aprovado |
-| test_explicit_exit_survives_wrong_model_route | Aprovado |
-| test_fabricated_citation | Aprovado |
-| test_judge_schema | Aprovado |
-| test_malformed_router | Aprovado |
-| test_real_http_contract | Aprovado |
-| test_tool_cannot_choose_account | Aprovado |
-| test_unlisted_tool | Aprovado |
+```text
+test_ambiguous_value (test_central.WorkflowTests.test_ambiguous_value)
+test_case_does_not_open_business_ticket_on_question_only (test_central.WorkflowTests.test_case_does_not_open_business_ticket_on_question_only)
+test_concurrent_confirmations (test_central.WorkflowTests.test_concurrent_confirmations)
+test_customer_requests_cancel_after_offer (test_central.WorkflowTests.test_customer_requests_cancel_after_offer)
+test_empty_metrics (test_central.WorkflowTests.test_empty_metrics)
+test_http (test_central.WorkflowTests.test_http)
+test_index (test_central.WorkflowTests.test_index)
+test_negative_handoff (test_central.WorkflowTests.test_negative_handoff)
+test_priority_over_offer (test_central.WorkflowTests.test_priority_over_offer)
+test_private_question_not_logged (test_central.WorkflowTests.test_private_question_not_logged)
+test_public_development (test_central.WorkflowTests.test_public_development)
+test_retry_and_persistence (test_central.WorkflowTests.test_retry_and_persistence)
+test_stale_offer (test_central.WorkflowTests.test_stale_offer)
+test_ticket_review (test_central.WorkflowTests.test_ticket_review)
+test_judge_calibration_detects_false_approval (test_evaluation.EvaluationTests.test_judge_calibration_detects_false_approval)
+test_reject_mismatched_experiments (test_evaluation.EvaluationTests.test_reject_mismatched_experiments)
+test_repeated_run_and_ungraded_release (test_evaluation.EvaluationTests.test_repeated_run_and_ungraded_release)
+test_deployed_channel (test_integrations.IntegrationTests.test_deployed_channel)
+test_graph_two_specialists (test_integrations.IntegrationTests.test_graph_two_specialists)
+test_mcp_in_workflow (test_integrations.IntegrationTests.test_mcp_in_workflow)
+test_blind_review_roundtrip (test_pilot.CandidateTests.test_blind_review_roundtrip)
+test_config_matches_experiment (test_pilot.CandidateTests.test_config_matches_experiment)
+test_no_contract_for_unrelated_question (test_pilot.CandidateTests.test_no_contract_for_unrelated_question)
+test_operator_queue_protected (test_pilot.CandidateTests.test_operator_queue_protected)
+test_reject_weak_operator_secret_for_pilot (test_pilot.CandidateTests.test_reject_weak_operator_secret_for_pilot)
+test_unknown_cost_stays_missing (test_pilot.CandidateTests.test_unknown_cost_stays_missing)
+test_validate_plan_before_tool (test_pilot.CandidateTests.test_validate_plan_before_tool)
+test_stdio_search (test_protocols.MCPTests.test_stdio_search)
+test_commercial_consent_never_generic_yes (test_protocols.ProviderTests.test_commercial_consent_never_generic_yes)
+test_duplicate_route (test_protocols.ProviderTests.test_duplicate_route)
+test_explicit_exit_survives_wrong_model_route (test_protocols.ProviderTests.test_explicit_exit_survives_wrong_model_route)
+test_fabricated_citation (test_protocols.ProviderTests.test_fabricated_citation)
+test_judge_schema (test_protocols.ProviderTests.test_judge_schema)
+test_malformed_router (test_protocols.ProviderTests.test_malformed_router)
+test_real_http_contract (test_protocols.ProviderTests.test_real_http_contract)
+test_tool_cannot_choose_account (test_protocols.ProviderTests.test_tool_cannot_choose_account)
+test_unlisted_tool (test_protocols.ProviderTests.test_unlisted_tool)
+
+Ran 37 tests in 10.373s
+
+OK
+```

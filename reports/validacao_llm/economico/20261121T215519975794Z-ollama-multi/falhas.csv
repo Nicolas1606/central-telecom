@@ -1,0 +1,15 @@
+case,turn,expected,actual,reason
+D01,1,answer,handoff,falha_validacao
+D01,2,resolved,blocked,sessao_encerrada
+D05,1,answer,handoff,falha_validacao
+D07,1,offer,handoff,falha_validacao
+D07,2,converted,blocked,sessao_encerrada
+D12,1,clarify,handoff,falha_validacao
+C06,1,handoff,handoff,falha_validacao
+D01,1,answer,handoff,falha_validacao
+D01,2,resolved,blocked,sessao_encerrada
+D05,1,answer,handoff,falha_validacao
+D07,1,offer,handoff,falha_validacao
+D07,2,converted,blocked,sessao_encerrada
+D12,1,clarify,handoff,falha_validacao
+C06,1,handoff,handoff,falha_validacao

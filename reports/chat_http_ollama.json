@@ -1,0 +1,89 @@
+{
+  "ambiente": "chat HTTP local • CRM fictício",
+  "resposta": "Mensalidade de R$ 79,00 e adicionais de R$ 15,00. Total de R$ 94,00.",
+  "trace": [
+    {
+      "agent": "router",
+      "routing": "scope_gate",
+      "domains": [
+        "cobranca"
+      ]
+    },
+    {
+      "agent": "cobranca",
+      "model": "qwen3:0.6b",
+      "prompt": "v2",
+      "hash": "e2f48c4ce9ee",
+      "tokens_in": 163,
+      "tokens_out": 10,
+      "cost_usd": null,
+      "ok": true,
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "purpose": "ToolPlan",
+      "decision": {
+        "name": "invoice"
+      },
+      "latency_ms": 3782.22
+    },
+    {
+      "tool": "invoice",
+      "agent": "cobranca",
+      "ok": true
+    },
+    {
+      "agent": "cobranca",
+      "retrieval": [
+        "FAT-01",
+        "FAT-02"
+      ],
+      "expected_policy": "FAT-01"
+    },
+    {
+      "agent": "cobranca",
+      "selection": "validated_top1",
+      "source_id": "FAT-01"
+    }
+  ],
+  "fontes": [
+    "FAT-01"
+  ],
+  "resumo_recebido": {
+    "ultima_area": "cobranca",
+    "dominios": [],
+    "motivo": "pedido_humano",
+    "orientacao": "Encaminhei seu atendimento a uma pessoa.",
+    "fontes": [],
+    "historico": [
+      {
+        "acao": "answer",
+        "orientacao": "Mensalidade de R$ 79,00 e adicionais de R$ 15,00. Total de R$ 94,00."
+      }
+    ]
+  },
+  "fila_sem_token_http": 401,
+  "resultado_revisao": {
+    "status": "revisado"
+  },
+  "metricas": {
+    "conversas": 1,
+    "turnos": 2,
+    "abertas": 0,
+    "resolvidas_confirmadas": 0,
+    "resolucao": 0.0,
+    "motivos_transbordo": {
+      "pedido_humano": 1
+    },
+    "transbordo": 1.0,
+    "ofertas": 0,
+    "aceites": 0,
+    "conversao": null,
+    "p95_ms": 3789.325,
+    "chamadas_llm": 1,
+    "tokens_entrada": 163,
+    "tokens_saida": 10,
+    "custo_inferencia_usd_por_conversa": null,
+    "alertas": []
+  }
+}

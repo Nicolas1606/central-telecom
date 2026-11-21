@@ -1,0 +1,13 @@
+{
+  "pares_previstos": 10,
+  "pares_completos": 0,
+  "participantes_com_pares": 0,
+  "pendentes": 10,
+  "acertos": {
+    "manual": 0,
+    "assistida": 0
+  },
+  "criticos_assistida": 0,
+  "ganho_mediano_pct": null,
+  "criterio_exploratorio": "pendente"
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "caso": "fatura_correta",
+    "esperado": "pass",
+    "juiz": "pass",
+    "justificativa": "A resposta está alinhada com os dados fornecidos na fonte FAT-01, que indica que a mensalidade é R$ 79,00 e os adicionais R$ 15,00, totalizando R$ 94,00. As informações são consistentes e não há falta de fonte necessária ou inconsistência no valor.",
+    "trace": [
+      {
+        "agent": "judge",
+        "model": "qwen3:1.7b",
+        "prompt": "v2",
+        "hash": "5d0415a11b1d",
+        "tokens_in": 465,
+        "tokens_out": 93,
+        "cost_usd": null,
+        "ok": true,
+        "temperature": 0,
+        "think": false,
+        "max_tokens": 128,
+        "purpose": "Verdict",
+        "decision": {
+          "verdict": "pass"
+        },
+        "latency_ms": 8149.19
+      }
+    ]
+  },
+  {
+    "caso": "total_inventado",
+    "esperado": "fail",
+    "juiz": "fail",
+    "justificativa": "A resposta não está alinhada com a referência fornecida. A fatura mencionada na resposta é R$ 799,00, mas a referência indica que o total é R$ 94,00 (mensalidade) + R$ 15,00 (adicional) = R$ 94,00. A resposta apresenta um valor total de R$ 799,00, o que é inconsistente com a informação da referência.",
+    "trace": [
+      {
+        "agent": "judge",
+        "model": "qwen3:1.7b",
+        "prompt": "v2",
+        "hash": "5d0415a11b1d",
+        "tokens_in": 469,
+        "tokens_out": 122,
+        "cost_usd": null,
+        "ok": true,
+        "temperature": 0,
+        "think": false,
+        "max_tokens": 128,
+        "purpose": "Verdict",
+        "decision": {
+          "verdict": "fail"
+        },
+        "latency_ms": 5950.69
+      }
+    ]
+  },
+  {
+    "caso": "aceite_inventado",
+    "esperado": "fail",
+    "juiz": "fail",
+    "justificativa": "A resposta não está alinhada com a referência fornecida. A referência indica que o valor da fatura é R$ 94,00 ou R$ 15,00, mas a ação apresenta uma resposta genérica e não contém dados específicos sobre o valor da fatura. Além disso, as fontes estão vazias, o que viola a exigência de cobertura suficiente.",
+    "trace": [
+      {
+        "agent": "judge",
+        "model": "qwen3:1.7b",
+        "prompt": "v2",
+        "hash": "5d0415a11b1d",
+        "tokens_in": 270,
+        "tokens_out": 105,
+        "cost_usd": null,
+        "ok": true,
+        "temperature": 0,
+        "think": false,
+        "max_tokens": 128,
+        "purpose": "Verdict",
+        "decision": {
+          "verdict": "fail"
+        },
+        "latency_ms": 3298.41
+      }
+    ]
+  }
+]

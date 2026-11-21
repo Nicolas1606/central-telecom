@@ -1,0 +1,5 @@
+case,turn,expected,actual,reason
+N03,1,handoff,handoff,falha_validacao
+N05,1,clarify,handoff,encerramento
+N06,1,offer,handoff,fora_escopo
+N09,1,clarify,handoff,fora_escopo

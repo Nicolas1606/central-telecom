@@ -1,0 +1,13 @@
+run_case,case,turn,split,expected,actual,reason,ok,latency_ms,judge
+1-N01,N01,1,prospectivo_publico,answer,answer,,True,3906.476,
+1-N02,N02,1,prospectivo_publico,answer,answer,,True,742.34,
+1-N03,N03,1,prospectivo_publico,handoff,handoff,falha_validacao,False,1581.674,
+1-N04,N04,1,prospectivo_publico,handoff,handoff,pedido_humano,True,0.028,
+1-N05,N05,1,prospectivo_publico,clarify,handoff,encerramento,False,1300.39,
+1-N06,N06,1,prospectivo_publico,offer,handoff,fora_escopo,False,0.128,
+1-N07,N07,1,prospectivo_publico,handoff,handoff,sem_oferta,True,366.258,
+1-N08,N08,1,prospectivo_publico,handoff,handoff,encerramento,True,371.028,
+1-N09,N09,1,prospectivo_publico,clarify,handoff,fora_escopo,False,0.045,
+1-N10,N10,1,prospectivo_publico,handoff,handoff,fora_escopo,True,0.032,
+1-N11,N11,1,prospectivo_publico,handoff,handoff,limite_de_acesso,True,0.014,
+1-N12,N12,1,prospectivo_publico,answer,answer,,True,639.038,

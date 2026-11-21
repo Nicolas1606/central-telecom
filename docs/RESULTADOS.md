@@ -1,4 +1,6 @@
-# Evidências do ensaio
+# Histórico do desenvolvimento do modo por regras
+
+Os experimentos posteriores com o modelo real estão em [EVIDENCIAS.md](EVIDENCIAS.md).
 
 A unidade avaliada é um turno de atendimento. Para acertar um turno, a aplicação precisa emitir a ação, selecionar as áreas na ordem esperada, citar o conjunto de políticas do gabarito, incluir os fatos numéricos ou trechos de referência e acertar o motivo quando especificado. Algumas verificações textuais por substring deixam passar outras frases indevidas. A revisão humana avalia a orientação completa.
 

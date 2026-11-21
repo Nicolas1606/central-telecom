@@ -1,0 +1,85 @@
+caso,split,metodo,recall_at_3,ids
+D01,dev,lexical,1.0,FAT-01 OFE-01
+D01,dev,semantic,1.0,FAT-01 OFE-01 FAT-02
+D01,dev,hybrid,1.0,FAT-01 OFE-01 FAT-02
+D02,dev,lexical,1.0,FAT-01 OFE-01 NET-01
+D02,dev,semantic,1.0,FAT-01 OFE-01 NET-01
+D02,dev,hybrid,1.0,FAT-01 OFE-01 NET-01
+D03,dev,lexical,1.0,FAT-02 FAT-01
+D03,dev,semantic,1.0,FAT-02 FAT-01 NET-01
+D03,dev,hybrid,1.0,FAT-02 FAT-01 NET-01
+D04,dev,lexical,1.0,NET-02 NET-01 CAN-01
+D04,dev,semantic,1.0,NET-02 NET-01 CAN-01
+D04,dev,hybrid,1.0,NET-02 NET-01 CAN-01
+D04,dev,lexical,0.0,
+D04,dev,semantic,0.0,
+D04,dev,hybrid,0.0,
+D05,dev,lexical,1.0,NET-02 NET-01 CAN-01
+D05,dev,semantic,1.0,NET-02 NET-01 CAN-01
+D05,dev,hybrid,1.0,NET-02 NET-01 CAN-01
+D06,dev,lexical,1.0,CAN-01
+D06,dev,semantic,1.0,CAN-01 OFE-01 FAT-02
+D06,dev,hybrid,1.0,CAN-01 OFE-01 FAT-02
+D07,dev,lexical,1.0,OFE-01 CAN-01 NET-01
+D07,dev,semantic,1.0,OFE-01 CAN-01 FAT-01
+D07,dev,hybrid,1.0,OFE-01 CAN-01 FAT-01
+D08,dev,lexical,1.0,OFE-01 FAT-01
+D08,dev,semantic,1.0,OFE-01 FAT-01 CAN-01
+D08,dev,hybrid,1.0,OFE-01 FAT-01 CAN-01
+D09,dev,lexical,1.0,NET-02 NET-01
+D09,dev,semantic,1.0,NET-02 NET-01 CAN-01
+D09,dev,hybrid,1.0,NET-02 NET-01 CAN-01
+D12,dev,lexical,1.0,FAT-01 OFE-01 CAN-01
+D12,dev,semantic,1.0,OFE-01 FAT-01 CAN-01
+D12,dev,hybrid,1.0,OFE-01 FAT-01 CAN-01
+D15,dev,lexical,0.5,NET-01 OFE-01 CAN-01
+D15,dev,semantic,0.5,OFE-01 NET-02 NET-01
+D15,dev,hybrid,0.5,OFE-01 NET-01 NET-02
+D16,dev,lexical,1.0,FAT-02 FAT-01 CAN-01
+D16,dev,semantic,1.0,FAT-02 FAT-01 OFE-01
+D16,dev,hybrid,1.0,FAT-02 FAT-01 OFE-01
+C01,challenge,lexical,1.0,FAT-01 FAT-02
+C01,challenge,semantic,1.0,FAT-01 FAT-02 OFE-01
+C01,challenge,hybrid,1.0,FAT-01 FAT-02 OFE-01
+C02,challenge,lexical,1.0,NET-02 NET-01 CAN-01
+C02,challenge,semantic,1.0,NET-01 NET-02 CAN-01
+C02,challenge,hybrid,1.0,NET-02 NET-01 CAN-01
+C03,challenge,lexical,1.0,FAT-01 OFE-01 NET-01
+C03,challenge,semantic,1.0,FAT-01 OFE-01 NET-02
+C03,challenge,hybrid,1.0,FAT-01 OFE-01 NET-02
+C04,challenge,lexical,1.0,CAN-01 OFE-01
+C04,challenge,semantic,1.0,CAN-01 OFE-01 NET-02
+C04,challenge,hybrid,1.0,CAN-01 OFE-01 NET-02
+C06,challenge,lexical,0.0,FAT-01
+C06,challenge,semantic,1.0,FAT-01 OFE-01 FAT-02
+C06,challenge,hybrid,1.0,FAT-01 OFE-01 FAT-02
+C07,challenge,lexical,1.0,FAT-01 NET-01 NET-02
+C07,challenge,semantic,1.0,FAT-01 NET-01 NET-02
+C07,challenge,hybrid,1.0,FAT-01 NET-01 NET-02
+C09,challenge,lexical,1.0,NET-01 NET-02
+C09,challenge,semantic,1.0,NET-01 NET-02 FAT-01
+C09,challenge,hybrid,1.0,NET-01 NET-02 FAT-01
+C10,challenge,lexical,1.0,OFE-01 FAT-01 NET-02
+C10,challenge,semantic,1.0,OFE-01 FAT-01 CAN-01
+C10,challenge,hybrid,1.0,OFE-01 FAT-01 NET-02
+V01,verification,lexical,1.0,NET-01 NET-02 FAT-01
+V01,verification,semantic,1.0,NET-01 NET-02 FAT-01
+V01,verification,hybrid,1.0,NET-01 NET-02 FAT-01
+V02,verification,lexical,1.0,FAT-01 FAT-02 NET-02
+V02,verification,semantic,1.0,FAT-01 OFE-01 FAT-02
+V02,verification,hybrid,1.0,FAT-01 OFE-01 FAT-02
+V03,verification,lexical,1.0,CAN-01 OFE-01 NET-01
+V03,verification,semantic,1.0,CAN-01 OFE-01 NET-02
+V03,verification,hybrid,1.0,CAN-01 OFE-01 NET-02
+V04,verification,lexical,1.0,CAN-01 NET-02
+V04,verification,semantic,1.0,CAN-01 NET-02 NET-01
+V04,verification,hybrid,1.0,CAN-01 NET-02 NET-01
+V05,verification,lexical,1.0,FAT-01 NET-01 FAT-02
+V05,verification,semantic,0.5,FAT-01 OFE-01 NET-01
+V05,verification,hybrid,0.5,FAT-01 NET-01 OFE-01
+V06,verification,lexical,1.0,FAT-02 FAT-01 CAN-01
+V06,verification,semantic,1.0,FAT-02 FAT-01 CAN-01
+V06,verification,hybrid,1.0,FAT-02 FAT-01 CAN-01
+V08,verification,lexical,1.0,FAT-01 OFE-01 NET-01
+V08,verification,semantic,1.0,FAT-01 OFE-01 FAT-02
+V08,verification,hybrid,1.0,FAT-01 OFE-01 NET-01

@@ -1,0 +1,7 @@
+expected,answer,blocked,clarify,converted,handoff,offer,resolved
+answer,13,1,0,0,1,0,0
+clarify,0,0,3,0,1,0,0
+converted,0,0,0,2,0,0,0
+handoff,0,0,0,0,14,0,0
+offer,0,0,0,0,0,3,0
+resolved,0,0,0,0,0,0,2

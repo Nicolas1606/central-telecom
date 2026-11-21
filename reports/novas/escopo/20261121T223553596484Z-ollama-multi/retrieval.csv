@@ -1,0 +1,25 @@
+caso,split,metodo,recall_at_3,ids
+N01,prospectivo_publico,lexical,1.0,FAT-01 NET-01
+N01,prospectivo_publico,semantic,1.0,FAT-01 OFE-01 NET-01
+N01,prospectivo_publico,hybrid,1.0,FAT-01 NET-01 OFE-01
+N02,prospectivo_publico,lexical,1.0,NET-01 FAT-01 CAN-01
+N02,prospectivo_publico,semantic,1.0,NET-01 NET-02 FAT-02
+N02,prospectivo_publico,hybrid,1.0,NET-01 NET-02 FAT-01
+N03,prospectivo_publico,lexical,0.0,FAT-01 NET-01
+N03,prospectivo_publico,semantic,0.0,FAT-01 OFE-01 NET-01
+N03,prospectivo_publico,hybrid,0.0,FAT-01 OFE-01 NET-01
+N05,prospectivo_publico,lexical,1.0,NET-02 CAN-01
+N05,prospectivo_publico,semantic,1.0,NET-02 NET-01 CAN-01
+N05,prospectivo_publico,hybrid,1.0,NET-02 NET-01 CAN-01
+N06,prospectivo_publico,lexical,1.0,CAN-01 OFE-01 NET-02
+N06,prospectivo_publico,semantic,1.0,OFE-01 CAN-01 NET-02
+N06,prospectivo_publico,hybrid,1.0,CAN-01 OFE-01 NET-02
+N07,prospectivo_publico,lexical,1.0,OFE-01 CAN-01 FAT-02
+N07,prospectivo_publico,semantic,1.0,OFE-01 CAN-01 FAT-02
+N07,prospectivo_publico,hybrid,1.0,OFE-01 CAN-01 FAT-02
+N08,prospectivo_publico,lexical,1.0,CAN-01 OFE-01
+N08,prospectivo_publico,semantic,1.0,CAN-01 OFE-01 NET-02
+N08,prospectivo_publico,hybrid,1.0,CAN-01 OFE-01 NET-02
+N12,prospectivo_publico,lexical,1.0,FAT-01 FAT-02
+N12,prospectivo_publico,semantic,1.0,FAT-01 FAT-02 OFE-01
+N12,prospectivo_publico,hybrid,1.0,FAT-01 FAT-02 OFE-01

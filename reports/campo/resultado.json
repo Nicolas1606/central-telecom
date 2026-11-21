@@ -1,0 +1,20 @@
+{
+  "origem": "https://www.kaggle.com/datasets/thoughtvector/customer-support-on-twitter",
+  "licenca_fonte": "CC BY-NC-SA 4.0",
+  "linhas_lidas": 2811774,
+  "mensagens_pareadas": 71397,
+  "marcas_observadas": [
+    "TMobileHelp",
+    "VerizonSupport",
+    "sprintcare"
+  ],
+  "mediana_minutos": 3.7666666666666666,
+  "p90_minutos": 23.10666666666669,
+  "sinais": {
+    "cobranca": 4227,
+    "conexao": 3861,
+    "cancelamento": 883,
+    "recorrencia": 4760
+  },
+  "sha256_arquivo_origem": "7ffe106c4158c22f79b2a220297e4090dd68fa034c6e58710578ad8cfeea558a"
+}

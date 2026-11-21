@@ -18,3 +18,22 @@ Produto apresenta uma fatura e pergunta o que uma solução útil precisa entreg
 ## Verificação do candidato
 
 Registre ao menos 20 casos inéditos com `split` igual a `private`, cobrindo orientação, esclarecimento e transbordo. Preencha em human_review.csv as colunas human_grade (pass/fail), critical_error (true/false) e reviewer (pseudônimo do revisor independente). Salve em CSV UTF-8 separado por vírgulas. Para avaliar a concordância do juiz, rode calibrate. Para a decisão técnica, execute `python main.py gate CAMINHO_DA_EXECUCAO` com a mesma AGENT_CONFIG usada na coleta. O comando lista cada critério e retorna código 2 quando faltam evidências. Confere o hash do código, dos prompts, das políticas e da configuração, p95 ≤ 10 s e a presença de preço de inferência. O responsável também compara custo ao orçamento financeiro combinado. A ferramenta não autentica revisores e não consegue comprovar sozinha que as perguntas ficaram reservadas.
+
+## Executar a coleta e a revisão cega
+
+Copie evaluation/piloto/coleta.csv para runtime/estudo.csv. Há 20 linhas distribuídas entre cinco códigos de participante e duas famílias por pessoa. Distribua variantes equivalentes, colete duração até o resultado revisado, marque correto e critico com 0 ou 1 e identifique o avaliador por pseudônimo. Registre falhas e desistências. O comando mostra quantos pares ficaram incompletos. O template vazio tem zero observações.
+
+```powershell
+python scripts/estudo.py medir runtime/estudo.csv
+python scripts/revisao_cega.py preparar CAMINHO_DA_EXECUCAO runtime/revisao
+```
+
+Entregue à operação apenas para_revisor.csv, as políticas e as duas fichas fictícias com dados em centavos de data/accounts.json. Cada linha contém pergunta, histórico, orientação e passagens. Proteja chave_do_coordenador.csv. A pessoa registra human_grade (pass/fail), critical_error (true/false), reviewer e observação. Após o retorno, o coordenador importa as notas, confere falsos positivos do juiz e executa o gate com a mesma configuração.
+
+```powershell
+python scripts/revisao_cega.py importar CAMINHO_DA_EXECUCAO runtime/revisao
+python main.py calibrate CAMINHO_DA_EXECUCAO
+python main.py gate CAMINHO_DA_EXECUCAO
+```
+
+O canal local usa cadastros fictícios A/B selecionáveis. Para esta simulação supervisionada, mantenha a aplicação em loopback, defina TELECOM_ENV=pilot e use TELECOM_OPERATOR_TOKEN com 24 ou mais caracteres. A fila, a revisão e as métricas pedem a credencial. Para uma implantação com clientes identificáveis, engenharia precisa disponibilizar identidade de usuário e operador, vínculo de conta autenticado, transporte protegido, política de retenção, limites e gestão operacional do serviço. O consentimento e o aceite do piloto pertencem à equipe responsável.

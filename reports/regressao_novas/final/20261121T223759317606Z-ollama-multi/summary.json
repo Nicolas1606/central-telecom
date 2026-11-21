@@ -1,0 +1,120 @@
+{
+  "tipo": "replay público sintético",
+  "modo": "ollama",
+  "arquitetura": "multi",
+  "repeticoes": 1,
+  "python": "3.12.14",
+  "config": {
+    "router": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v3",
+      "threads": 4,
+      "routing": "scope_v2"
+    },
+    "cobranca": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v2",
+      "threads": 4,
+      "tool_protocol": "plan",
+      "source_selection": "verified_policy"
+    },
+    "suporte": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v2",
+      "threads": 4,
+      "tool_protocol": "plan",
+      "source_selection": "verified_policy"
+    },
+    "cancelamento": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v2",
+      "threads": 4,
+      "tool_protocol": "plan",
+      "source_selection": "verified_policy"
+    },
+    "generalista": {
+      "model": "qwen3:0.6b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 96,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v1",
+      "threads": 4
+    },
+    "judge": {
+      "model": "qwen3:1.7b",
+      "temperature": 0,
+      "think": false,
+      "max_tokens": 128,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "prompt_version": "v2",
+      "threads": 4
+    }
+  },
+  "release_sha256": "f2145667ebc58b96f3aa55b326d620bcff3af7fcdc7af375bde1381aff66ff6e",
+  "por_grupo": {
+    "prospectivo_publico": {
+      "turnos": 12,
+      "corretos": 12,
+      "acerto_turnos": 1.0,
+      "acerto_acao": 1.0,
+      "aceites_indevidos_observados": 0,
+      "casos": 12,
+      "casos_integrais": 12
+    }
+  },
+  "operacao_no_replay": {
+    "conversas": 12,
+    "turnos": 12,
+    "abertas": 6,
+    "resolvidas_confirmadas": 0,
+    "resolucao": 0.0,
+    "motivos_transbordo": {
+      "contestacao": 1,
+      "pedido_humano": 1,
+      "sem_oferta": 1,
+      "encerramento": 1,
+      "fora_escopo": 1,
+      "limite_de_acesso": 1
+    },
+    "transbordo": 0.5,
+    "ofertas": 1,
+    "aceites": 0,
+    "conversao": 0.0,
+    "p95_ms": 4444.432,
+    "chamadas_llm": 9,
+    "tokens_entrada": 1496,
+    "tokens_saida": 94,
+    "custo_inferencia_usd_por_conversa": null,
+    "alertas": []
+  },
+  "recall_at_3": {
+    "hybrid": 0.875,
+    "lexical": 0.875,
+    "semantic": 0.875
+  },
+  "variacao_de_acao": null,
+  "casos_sha256": "1c5b7cd8d0c8dbed5d4847fa817893bb6e5b677c63368bc193c91af4980b763c"
+}

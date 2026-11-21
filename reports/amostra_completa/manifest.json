@@ -1,0 +1,19 @@
+{
+  "runtime": {
+    "version": "0.11.10"
+  },
+  "pesos": {
+    "qwen3:0.6b": "7df6b6e09427a769808717c0a93cadc4ae99ed4eb8bf5ca557c90846becea435",
+    "qwen3:1.7b": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7"
+  },
+  "python": "3.12.14",
+  "plataforma": "Linux x86_64",
+  "data_utc": "2026-11-21T22:32:12.752110+00:00",
+  "modo": "ollama",
+  "executor": "langgraph",
+  "ordem": [
+    "enxuto"
+  ],
+  "repeticoes": 1,
+  "juiz": false
+}
