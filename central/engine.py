@@ -20,6 +20,13 @@ def result(action, message, reason="", sources=None):
 def money(n):
     return f"R$ {n//100},{n%100:02d}"
 
+def canonical_request(q):
+    q = re.sub(r"\b(?:pagar|gastar) menos\b","mais barato",q)
+    return re.sub(r"\b(?:dar|dê|de) uma (?:forca|mao)\b","ajuda",q)
+
+def conditional_exit(q):
+    return has(r"\b(?:talvez|quem sabe|pensando em|caso|se)\b",q)
+
 def rules_route(q,last):
     clean = re.sub(r"\b(?:nao (?:quero |vou |desejo )?(?:cancelar|encerrar)(?: o contrato)?|sem cancelar)\b","",q)
     clean = re.sub(r"\bmais em conta\b","mais barato",clean)
@@ -44,13 +51,15 @@ class Engine:
 
     def route(self, text, state, trace):
         q = norm(text)
+        if self.mode == "demo" or self.llm.config["router"].get("routing") == "scope_v2":
+            q = canonical_request(q)
         if self.mode == "demo":
             return rules_route(q,state.get("last"))
         role = "router" if self.design == "multi" else "generalista"
         strategy = self.llm.config[role].get("routing")
-        if strategy in {"anchored", "scope_gate"}:
+        if strategy in {"anchored", "scope_gate", "scope_v2"}:
             candidates = rules_route(q,state.get("last"))
-            if strategy == "scope_gate" or all(d in TOOLS for d in candidates):
+            if strategy in {"scope_gate","scope_v2"} or all(d in TOOLS for d in candidates):
                 trace.append({"agent":role,"routing":strategy,"domains":candidates})
                 return candidates
         route = self.llm.chat(role,[user({"etapa":"rotear todas as intenções no esquema","pergunta":text,
@@ -62,6 +71,9 @@ class Engine:
 
     def specialist(self, domain, text, state, trace):
         q = norm(text)
+        revised = self.mode == "demo" or self.llm.config["router"].get("routing") == "scope_v2"
+        if revised:
+            q = canonical_request(q)
         account = state["account"]
         tool = TOOLS[domain]
         role = domain if self.design == "multi" else "generalista"
@@ -104,9 +116,11 @@ class Engine:
         else:
             offer = has(r"desconto|oferta|alternativa|mais barato",q)
             firm_cancel = has(r"quero cancelar|cancele|encerre|quero encerrar|cancelar agora",q) and not has(r"nao quero cancelar|sem cancelar|se (?:isso|continuar)",q)
+            if revised and conditional_exit(q):
+                firm_cancel = False
             if firm_cancel or not offer:
                 policy = "CAN-01"
-                if has(r"\bse\b|talvez|pensando|como funciona",q) and not firm_cancel:
+                if (has(r"\bse\b|talvez|pensando|como funciona",q) or revised and conditional_exit(q)) and not firm_cancel:
                     action,reason,msg_text = "clarify","confirmar_intencao","Você quer solicitar o encerramento agora ou apenas entender as opções?"
                 else:
                     action,reason,msg_text = "handoff","encerramento","Uma pessoa vai acompanhar seu pedido de encerramento. O contrato permanece ativo até a conclusão."
@@ -129,8 +143,12 @@ class Engine:
         # Para a variante econômica, um trecho único compatível com a política de negócio
         # pode ser confirmado pelo servidor após uma chamada real de ferramenta.
         direct = self.llm.config[role].get("source_selection") == "validated_top1" and hits and hits[0]["id"] == policy
+        selection = "validated_top1"
+        if self.llm.config[role].get("source_selection") == "verified_policy":
+            direct = any(r["id"] == policy for r in hits)
+            selection = "verified_policy"
         if self.mode == "ollama" and direct:
-            trace.append({"agent":role,"selection":"validated_top1","source_id":policy})
+            trace.append({"agent":role,"selection":selection,"source_id":policy})
         if self.mode=="ollama" and not direct:
             if structured:
                 messages = [question, user({"ferramenta_executada":tool,"fatos":fact})]

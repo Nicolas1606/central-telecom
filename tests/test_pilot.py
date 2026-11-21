@@ -18,14 +18,14 @@ from scripts.finops import summarize
 class CandidateTests(unittest.TestCase):
     def test_no_contract_for_unrelated_question(self):
         engine=Engine("ollama")
-        engine.llm.config=plans()["escopo"][1]
+        engine.llm.config=plans()["final"][1]
         with patch.object(engine.llm,"chat",side_effect=AssertionError("Não chamar modelo para assunto externo")):
             result=engine.turn("O que fazer com o passaporte?",{"account":"A"})
         self.assertEqual(result["reason"],"fora_escopo")
 
     def test_validate_plan_before_tool(self):
         engine=Engine("ollama")
-        engine.llm.config=plans()["escopo"][1]
+        engine.llm.config=plans()["final"][1]
         with patch.object(engine.llm,"chat",return_value=ToolPlan(name="eligibility")):
             result=engine.turn("Quero ver minha fatura",{"account":"A"})
         self.assertEqual(result["reason"],"falha_validacao")
@@ -44,7 +44,7 @@ class CandidateTests(unittest.TestCase):
                 create_app(Path(temp)/"demo.db")
 
     def test_config_matches_experiment(self):
-        self.assertEqual(json.loads((ROOT/"config/piloto.json").read_text()),plans()["escopo"][1])
+        self.assertEqual(json.loads((ROOT/"config/piloto.json").read_text()),plans()["final"][1])
 
     def test_blind_review_roundtrip(self):
         with tempfile.TemporaryDirectory() as folder:

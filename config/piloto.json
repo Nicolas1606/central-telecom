@@ -8,7 +8,7 @@
     "output_usd_per_million": null,
     "prompt_version": "v3",
     "threads": 4,
-    "routing": "scope_gate"
+    "routing": "scope_v2"
   },
   "cobranca": {
     "model": "qwen3:0.6b",
@@ -20,7 +20,7 @@
     "prompt_version": "v2",
     "threads": 4,
     "tool_protocol": "plan",
-    "source_selection": "validated_top1"
+    "source_selection": "verified_policy"
   },
   "suporte": {
     "model": "qwen3:0.6b",
@@ -32,7 +32,7 @@
     "prompt_version": "v2",
     "threads": 4,
     "tool_protocol": "plan",
-    "source_selection": "validated_top1"
+    "source_selection": "verified_policy"
   },
   "cancelamento": {
     "model": "qwen3:0.6b",
@@ -44,7 +44,7 @@
     "prompt_version": "v2",
     "threads": 4,
     "tool_protocol": "plan",
-    "source_selection": "validated_top1"
+    "source_selection": "verified_policy"
   },
   "generalista": {
     "model": "qwen3:0.6b",
