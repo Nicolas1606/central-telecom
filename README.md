@@ -140,7 +140,7 @@ O experimento compara **generalista**, **multiagente padrão** e **multiagente c
 | Tokens e custo | Somatório reportado pelo provedor. Tarifas configuradas permitem estimar USD de inferência por conversa. Valores ausentes aparecem como “Sem medida”. |
 | Qualidade | Ação, domínio, fonte e fatos por turno e sucesso integral por conversa. O juiz de linguagem é avaliado à parte, com calibração humana. |
 
-## Como o projeto atende à vaga
+## Competências demonstradas
 
 | Competência | Onde verificar |
 |---|---|
